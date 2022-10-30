@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const {User} = require('../../models');
+const { beforeCreate } = require('../../models/User');
 
 router.get('/',(req,res)=>{
     User.findAll({
@@ -46,6 +47,7 @@ router.post('/',(req,res)=>{
 
 router.put('/:id',(req,res)=>{
     User.update(req.body, {
+        individualHooks: true,
         where:{
             id:req.params.id
         }
